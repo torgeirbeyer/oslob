@@ -9,8 +9,8 @@
     <div class="container">
       <% data.forEach(d => { %>
         <div class="card">
-          <h4>Stasjon: </h4>
-           <p><%= d.name %></p> 
+           <h4><%= d.name %></h4> 
+           <p><%= d.where %></p> 
           <ul>
             <li>Ledige låser: <%= d.locks %></li>
             <li>Ledige sykler: <%= d.bikes %></li>

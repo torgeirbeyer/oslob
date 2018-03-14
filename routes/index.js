@@ -27,11 +27,13 @@ router.get('/', function(req, res, next) {
       return a.id - b.id
     })
 
+    console.log(stations)
 
     const data = stations.reduce(function(result, station) {
       const f = available.find(el => station.id == el.id)
       result.push({
               name: station.title,
+              where: station.subtitle,
               locks: f.availability.locks,
               bikes: f.availability.bikes
       })
