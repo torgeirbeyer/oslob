@@ -19,13 +19,7 @@ router.get('/', function(req, res, next) {
     axios.get(url2, config)
   ]).then(axios.spread((stations, available) => {
     stations = stations.data.stations;
-    stations.sort((a,b) => {
-      return a.id - b.id
-    })
     available = available.data.stations;
-    available.sort((a,b) => {
-      return a.id - b.id
-    })
 
     const data = stations.reduce(function(result, station) {
       const f = available.find(el => station.id == el.id)
