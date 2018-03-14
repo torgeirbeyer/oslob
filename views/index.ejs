@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bysykkel</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Bysykler</h1>
+    <div class="container">
+      <% data.forEach(d => { %>
+        <div class="card">
+          <h4>Stasjon: </h4>
+           <p><%= d.name %></p> 
+          <ul>
+            <li>Ledige låser: <%= d.locks %></li>
+            <li>Ledige sykler: <%= d.bikes %></li>
+          </ul>
+        </div>
+      <% }); %>
+    </div>
+  </body>
+</html>
