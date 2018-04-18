@@ -5,12 +5,13 @@ const axios = require('axios')
 const endpoint = 'https://oslobysykkel.no/api/v1/stations';
 const config = {
   'headers': {
-    'Client-Identifier': '66949ff070169324775777b287511e7e'
+    'Client-Identifier': process.env.API_KEY
   }
 }
 
-class Functions{
+class Functions {
   constructor(){}
+
   
   getStations() {
     axios.get(url, config)

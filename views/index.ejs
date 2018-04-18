@@ -5,7 +5,8 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1>Bysykler</h1>
+    <div id="map"></div>
+    <!-- <h1>Bysykler</h1>
     <div class="container">
       <% data.forEach(d => { %>
         <div class="card">
@@ -17,6 +18,22 @@
           </ul>
         </div>
       <% }); %>
-    </div>
+    </div> -->
+<script>
+  function initMap() {
+    const oslo = {lat: 59.9, lng: 10.7};
+    const map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 10,
+      center: oslo
+    });
+    const marker = new google.maps.Marker({
+      position: oslo,
+      map: map
+    });
+  }
+</script>
   </body>
 </html>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1W-hs-f2uk2FSqmcv0_6MFHn5GlLtVuQ&callback=initMap"
+type="text/javascript"></script>
+

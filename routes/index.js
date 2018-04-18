@@ -10,28 +10,29 @@ const url = 'https://oslobysykkel.no/api/v1/stations'
 const url2 = 'https://oslobysykkel.no/api/v1/stations/availability'
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', (req, res, next) => {
   let stations;
   let available;
-  let dict = [];
+  let result;
   axios.all([
     axios.get(url, config),
     axios.get(url2, config)
   ]).then(axios.spread((stations, available) => {
     stations = stations.data.stations;
     available = available.data.stations;
-
-    const data = stations.reduce(function(result, station) {
-      const f = available.find(el => station.id == el.id)
+    const data = stations.reduce((result, station) => {
+      const status = available.find(el => station.id == el.id)
       result.push({
-              name: station.title,
-              where: station.subtitle,
-              locks: f.availability.locks,
-              bikes: f.availability.bikes
+        name: station.title,
+        where: station.subtitle,
+        locks: status.availability.locks,
+        bikes: status.availability.bikes,
+        lat: station.center.latitude,
+        long: station.center.longitude
       })
       return result;
     }, [])
-
+    // console.log(data)
     res.render('index', {
       data
     })
