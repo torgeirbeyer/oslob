@@ -11,5 +11,7 @@ Kjør med nodemon: `npm run dev`.
 
 Kjør med node: `npm run start`.
 
-Liste over bysykler og ledige sykler/låser finnes nå på localhost:3000
+Data finnes som JSON på localhost:3001
+
+For å få opp kart, clone react app herfra: https://github.com/torgeirbeyer/react-sykkel og følg instruksjoner i README.md
 
