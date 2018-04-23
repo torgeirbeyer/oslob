@@ -15,27 +15,39 @@ router.get('/', (req, res, next) => {
   let available;
   let result;
   axios.all([
-    axios.get(url, config),
-    axios.get(url2, config)
-  ]).then(axios.spread((stations, available) => {
-    stations = stations.data.stations;
-    available = available.data.stations;
-    const data = stations.reduce((result, station) => {
-      const status = available.find(el => station.id == el.id)
-      result.push({
-        name: station.title,
-        where: station.subtitle,
-        locks: status.availability.locks,
-        bikes: status.availability.bikes,
-        lat: station.center.latitude,
-        long: station.center.longitude
-      })
-      return result;
-    }, [])
-    // console.log(data)
-    res.render('index', {
-      data
-    })
+      axios.get(url, config),
+      axios.get(url2, config)
+    ]).then(axios.spread((stations, available) => {
+      stations = stations.data.stations;
+      available = available.data.stations;
+      const data = stations.reduce((result, station) => {
+        const status = available.find(el => station.id === el.id)
+        result.push({
+          id: station.id,
+          name: station.title,
+          locks: status.availability.locks,
+          bikes: status.availability.bikes,
+          center: {
+            lat: station.center.latitude,
+            lng: station.center.longitude,
+          },
+          showInfo: false
+        })
+        return result;
+      }, [])
+    // data.forEach(el => {
+    //   new google.maps.Marker({
+    //     position: {
+    //       lat: el.center.latitude,
+    //       lng: el.center.longitude
+    //     }
+    //   })
+    // })
+    // console.log(markers)
+    // res.render('index', {
+    //   data
+    // })
+    res.json(data)
   })).catch(err => {
     console.log(err)
   })

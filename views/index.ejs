@@ -3,10 +3,12 @@
   <head>
     <title>Bysykkel</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBmWLH8X_7VfKbciY3S8GAPkubiX9pkEgM&v=3.31"></script>
+
   </head>
   <body>
     <div id="map"></div>
-    <!-- <h1>Bysykler</h1>
+    <h1>Bysykler</h1>
     <div class="container">
       <% data.forEach(d => { %>
         <div class="card">
@@ -18,22 +20,35 @@
           </ul>
         </div>
       <% }); %>
-    </div> -->
+    </div>
 <script>
   function initMap() {
-    const oslo = {lat: 59.9, lng: 10.7};
+    const oslo = {lat: 59.92, lng: 10.75};
     const map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 10,
+      zoom: 14,
       center: oslo
     });
     const marker = new google.maps.Marker({
       position: oslo,
       map: map
     });
+    console.log(data)
   }
+
+  function addMarker(station) {
+    let marker = new google.maps.Marker({
+      position: {
+        lat: station.center.latitude,
+        lng: station.center.longitude
+      },
+      label: station.name,
+      map: map
+    })
+  }
+
+  google.maps.event.addDomListener(window, 'load', initMap);
 </script>
   </body>
+
 </html>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1W-hs-f2uk2FSqmcv0_6MFHn5GlLtVuQ&callback=initMap"
-type="text/javascript"></script>
 
